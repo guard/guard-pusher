@@ -11,7 +11,7 @@ module Guard
         hash[key] = options[key] || options[key.to_sym]
         hash
       }.each { |config, value|
-        ::Pusher.send("#{config}=", value)
+        ::Pusher.send("#{config}=", value) if value
       }
 
       ::Pusher['guard-pusher']
@@ -25,7 +25,7 @@ module Guard
       @options = options
 
       config = if File.file?('config/pusher.yml')
-        YAML.load(ERB.new(File.read('config/pusher.yml')).result)['development']
+        YAML.load_file('config/pusher.yml')['development']
       else
         options
       end
