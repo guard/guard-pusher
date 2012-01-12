@@ -7,7 +7,7 @@ module Guard
   class Pusher < Guard
 
     def self.configure(options)
-      %w{app_id key secret}.inject(Hash.new) { |hash, key|
+      %w{app_id key secret host port}.inject(Hash.new) { |hash, key|
         hash[key] = options[key] || options[key.to_sym]
         hash
       }.each { |config, value|
